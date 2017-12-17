@@ -1,4 +1,4 @@
-{% for section_name,overwrite_settings in fail2ban_jail_cfg.items() %}
+{% for section_name, overwrite_settings in common_fail2ban_cfg.items() %}
 [{{ section_name }}]
 {% for option_name, option_value in overwrite_settings.items() %}
 {{ option_name }} = {{ option_value }}

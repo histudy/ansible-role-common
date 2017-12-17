@@ -1,68 +1,58 @@
 ---
-- name: manage group
-  group:
-    name: "{{ item.1 }}"
-  with_subelements:
-    - "{{ users }}"
-    - groups
-    - flags:
-        skip_missing: yes
-- name: manage user
+- name: set admin group sudo setting
+  template:
+    src: admin.j2
+    dest: /etc/sudoers.d/admin.j2
+    validate: '/usr/sbin/visudo -cf %s'
+- name: add user
   user:
     name: "{{ item.name }}"
     password: "{{ item.password|default(omit) }}"
     shell: "{{ item.shell|default(omit) }}"
-    home: "{{ item.home|default(omit) }}"
-    groups: "{{ item.groups|default(omit) }}"
-    group: "{{ item.group|default(omit) }}"
-    comment: "{{ item.comment|default(omit) }}"
-    system: "{{ item.system|default(false) }}"
-    uid: "{{ item.uid|default(omit) }}"
-    state: "{{ 'present' if item.state|default(true) else 'absent' }}"
-  with_items: "{{ users }}"
-- name: add authorized key
+  with_items: "{{ common_users }}"
+- name: set user authorized_key setting
   authorized_key:
-    user: "{{ item.0.name }}"
-    key: "{{ item.1 }}"
-  with_subelements:
-    - "{{ users }}"
-    - authorized_keys
-    - flags:
-        skip_missing: yes
+    user: "{{ item.name }}"
+    key: "https://github.com/{{ item.name }}.keys"
+  with_items: "{{ common_users }}"
+- name: add admin user to admin group
+  user:
+    name: "{{ item.name}}"
+    groups: adm
+    append: yes
+  with_items: "{{ common_users|selectattr('admin', 'defined')|selectattr('admin', 'equalto', true)|list }}"
 - name: install common packages
-  yum:
+  apt:
     name: "{{ item }}"
   with_items: "{{ common_packages }}"
-- name: install firewalld
-  yum:
-    name: firewalld
-- name: firewalld is active and enabled on system startup
-  systemd:
-    name: firewalld
-    state: started
-    enabled: yes
+- name: install ufw
+  apt:
+    name: ufw
+- name: set ufw policy
+  ufw:
+    state: enabled
+    policy: deny
 - name: install etckeeper
-  yum:
+  apt:
     name: etckeeper
-    enablerepo: epel
-- name: initilize etckeeper
-  command: etckeeper init
-  args:
-    chdir: /etc
-    creates: /etc/.git
-  register: result
-- name: initial commit
-  command: etckeeper commit "Initial commit"
-  when: result|changed
+- name: set ufw ssh role
+  ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
 - name: install fail2ban
-  yum:
+  apt:
     name: fail2ban
-    enablerepo: epel
 - name: create fail2ban setting
   template:
     src: jail.local.j2
     dest: /etc/fail2ban/jail.local
   notify: restart fail2ban
+- name: ufw is active and enabled on system startup
+  systemd:
+    name: ufw
+    state: started
+    enabled: yes
 - name: fail2ban is active and enabled on system startup
   systemd:
     name: fail2ban

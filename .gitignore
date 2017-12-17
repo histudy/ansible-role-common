@@ -1,5 +1,6 @@
-
-# Created by https://www.gitignore.io/api/ansible
+### Vagrant ###
+.vagrant/
+*.box
 
 ### Ansible ###
 # Ansible retry files
@@ -13,5 +14,3 @@
 __pycache__/
 tests/roles
 *.pyc
-
-# End of https://www.gitignore.io/api/ansible

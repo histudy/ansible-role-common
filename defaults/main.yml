@@ -1,42 +1,44 @@
 ---
 common_packages:
-  - unzip
-  - zip
+  - build-essential
+  - curl
+  - wget
+  - sudo
   - perl
-  - cpp
-  - make
-  - autoconf
-  - automake
-  - diffstat
-  - m4
-  - libtool
-  - gcc
-  - gcc-c++
-  - patch
-  - git
-  - yum-utils
-  - vim-enhanced
+  - task-japanese
   - bash-completion
+  - vim
+  - libtool
+  - git
   - tig
+  - dstat
+  - sysstat
+  - automake
+  - autoconf
+  - pkg-config
+  - ntp
+  - bzip2
+  - zip
+  - unzip
 
-users: []
-  # - name: sample_user
-  #   # Optional
-  #   password: "{{ 'password'|password_hash('sha512') }}"
-  #   groups:
-  #     - group1
-  #     - group2
-  #   authorized_keys:
-  #     - "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-  #     - https://github.com/ghuser.keys
-  #   shell: /bin/sh
-  #   home: /home/sample
-  #   system: no
-  #   group: primary_group
-  #   comment: sample acount
-  #   uid: 1111
-  #   state: yes
+# ユーザー
+common_users:
+  - name: wate
+    admin: yes
+  - name: sperkbird
+    admin: yes
+  - name: 223n
+    admin: yes
+  - name: nogajun
+    admin: yes
+  - name: fu7mu4
+  - name: akihiro0105
 
-fail2ban_jail_cfg:
+# 管理者グループのユーザーがsudoで実行を行う場合に
+# パスワードの入力を求めるか否か
+common_admin_requre_password: no
+
+# fail2banの設定
+common_fail2ban_cfg:
   sshd:
     enabled: yes
