@@ -21,7 +21,6 @@ common_packages:
   - zip
   - unzip
 
-# ユーザー
 common_users: []
   # - name: wate
   #   admin: yes
@@ -34,11 +33,8 @@ common_users: []
   # - name: fu7mu4
   # - name: akihiro0105
 
-# 管理者グループのユーザーがsudoで実行を行う場合に
-# パスワードの入力を求めるか否か
-common_admin_requre_password: no
+common_requre_sudo_password: no
 
-# fail2banの設定
 common_fail2ban_cfg:
   sshd:
     enabled: yes
