@@ -22,17 +22,17 @@ common_packages:
   - unzip
 
 # ユーザー
-common_users:
-  - name: wate
-    admin: yes
-  - name: sperkbird
-    admin: yes
-  - name: 223n
-    admin: yes
-  - name: nogajun
-    admin: yes
-  - name: fu7mu4
-  - name: akihiro0105
+common_users: []
+  # - name: wate
+  #   admin: yes
+  # - name: sperkbird
+  #   admin: yes
+  # - name: 223n
+  #   admin: yes
+  # - name: nogajun
+  #   admin: yes
+  # - name: fu7mu4
+  # - name: akihiro0105
 
 # 管理者グループのユーザーがsudoで実行を行う場合に
 # パスワードの入力を求めるか否か
