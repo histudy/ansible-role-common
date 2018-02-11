@@ -11,8 +11,6 @@ common_packages:
   - libtool
   - git
   - tig
-  - dstat
-  - sysstat
   - automake
   - autoconf
   - pkg-config
@@ -21,20 +19,27 @@ common_packages:
   - zip
   - unzip
 
+common_hostname: "{{ inventory_hostname }}"
+
+common_groups: []
+  # - name: histudy
+  # - name: kakogawa_infra
+  # - name: yurui_web
+  #   remove: yes
+
 common_users: []
   # - name: wate
-  #   admin: yes
-  # - name: sperkbird
-  #   admin: yes
-  # - name: 223n
-  #   admin: yes
-  # - name: nogajun
-  #   admin: yes
-  # - name: fu7mu4
-  # - name: akihiro0105
+  #   groups:
+  #     - histudy
+  #     - kakogawwa_infra
+  #   authorized_keys:
+  #     - "{{ lookup('file', '~/.ssh/id_rsa') }}"
+  # - name: sample_user
+  #   password: sampleUserP@ssw0rd
+  #   groups:
+  #     - histudy
+  #   shell: /bin/bash
+  # - name: remove_user
+  #   remove: yes
 
 common_requre_sudo_password: no
-
-common_fail2ban_cfg:
-  sshd:
-    enabled: yes
