@@ -5,15 +5,15 @@
 - name: ufw is active and enabled on system startup
   systemd:
     name: ufw
-    enabled: yes
+    enabled: true
     state: started
 - name: allow ssh port
   ufw:
     rule: limit
-    port: "{{ common_ssh_port }}"
+    port: "{{ common_ssh_port | string }}"
     proto: tcp
 - name: enable ufw and set default policy
   ufw:
-    logging: yes
+    logging: true
     state: enabled
     policy: deny

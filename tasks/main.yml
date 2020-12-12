@@ -4,24 +4,24 @@
     name:
       - python-apt
       - aptitude
-- name: set hostname
-  hostname:
-    name: "{{ common_hostname }}"
-  tags: hostname
+# - name: set hostname
+#   hostname:
+#     name: "{{ common_hostname }}"
+#   tags: hostname
 - name: manage group and user
   import_tasks: user.yml
   tags:
     - user
     - group
-- name: check ansible manage cron job file
-  stat:
-    path: /etc/cron.d/ansible_management_job
-  register: result
-- name: create ansible manage cron job file
-  file:
-    path: /etc/cron.d/ansible_management_job
-    state: touch
-  when: not result.stat.exists
+# - name: check ansible manage cron job file
+#   stat:
+#     path: /etc/cron.d/ansible_management_job
+#   register: result
+# - name: create ansible manage cron job file
+#   file:
+#     path: /etc/cron.d/ansible_management_job
+#     state: touch
+#   when: not result.stat.exists
 - name: setup ssh
   import_tasks: ssh.yml
   tags: ssh
