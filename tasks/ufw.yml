@@ -14,6 +14,6 @@
     proto: tcp
 - name: enable ufw and set default policy
   ufw:
-    logging: true
+    logging: "on"
     state: enabled
     policy: deny

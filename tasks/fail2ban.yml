@@ -8,13 +8,15 @@
     section: Definition
     option: logtarget
     value: /var/log/fail2ban.log
+    mode: "0644"
 - name: set fail2ban jail settings
   ini_file:
     path: /etc/fail2ban/jail.d/local.conf
     section: "{{ item.section }}"
     option: "{{ item.option }}"
-    value: "{{ item.value }}"
-    create: yes
+    value: "{{ item.value | string }}"
+    mode: "0644"
+    create: true
   with_items:
     - section: sshd
       option: enabled
@@ -23,5 +25,5 @@
 - name: fail2ban active and enabled on system startup service
   systemd:
     name: fail2ban
-    enabled: yes
+    enabled: true
     state: started

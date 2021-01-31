@@ -25,7 +25,7 @@ common_groups: []
   # - name: histudy
   # - name: kakogawa_infra
   # - name: yurui_web
-  #   remove: yes
+  #   remove: true
 
 common_users: []
   # - name: wate
@@ -40,16 +40,16 @@ common_users: []
   #     - histudy
   #   shell: /bin/bash
   # - name: remove_user
-  #   remove: yes
+  #   remove: true
 
-common_requre_sudo_password: no
+common_requre_sudo_password: false
 
 common_ssh_port: 22
 
-common_ssh_use_geoip_filter: yes
+common_ssh_use_geoip_filter: true
 common_ssh_allow_countries:
   - JP
 
 common_cron_geoip_update:
-  hour: "{{ 23|random }}"
-  minute: "{{ 59|random }}"
+  hour: 3
+  minute: 30

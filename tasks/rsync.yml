@@ -5,3 +5,4 @@
   template:
     src: rsyncd.conf.j2
     dest: /etc/rsyncd.conf
+    mode: "0644"

@@ -26,14 +26,14 @@
     - "{{ common_users|selectattr('remove', 'undefined')|list }}"
     - authorized_keys
     - flags:
-      skip_missing: yes
+      skip_missing: true
   tags:
     - user
 - name: set admin group
   user:
     name: "{{ item.name }}"
     groups: adm
-    append: yes
+    append: true
   with_items: "{{ common_users|selectattr('remove', 'undefined')|selectattr('admin', 'defined')|selectattr('admin', 'equalto', true)|list }}"
   tags:
     - user

@@ -6,8 +6,10 @@
   file:
     path: /etc/sudoers.d
     state: directory
+    mode: "0755"
 - name: admin group sudo setting
   template:
     src: admin.j2
     dest: /etc/sudoers.d/admin
     validate: 'visudo -cf %s'
+    mode: "0440"

@@ -10,12 +10,12 @@
   template:
     src: sshfilter.j2
     dest: /usr/local/bin/sshfilter
-    mode: 0755
+    mode: "0755"
 - name: create GeoIP database update script
   copy:
     src: update_geoip_database.sh
     dest: /usr/local/bin/update_geoip_database
-    mode: 0755
+    mode: "0755"
 - name: set shedule update GeoIP database job
   cron:
     name: "Update GeoIP database"
