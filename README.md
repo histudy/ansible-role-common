@@ -122,7 +122,7 @@ GeoIPによるSSHのフィルタリングを行うか否かを設定します。
 #### Example
 
 ```yml
-common_ssh_use_geoip_filter: yes
+common_ssh_use_geoip_filter: true
 ```
 
 ### common_ssh_allow_countries
@@ -162,8 +162,8 @@ common_cron_geoip_update:
 
 #### Example
 
-```
-common_admin_requre_password: no
+```yml
+common_admin_requre_password: false
 ```
 
 ### common_fail2ban_cfg
@@ -172,10 +172,11 @@ fail2banの設定をハッシュで指定します。
 
 #### Example
 
-```
+
+```yml
 common_fail2ban_cfg:
   sshd:
-    enabled: yes
+    enabled: true
 ```
 
 
@@ -187,9 +188,11 @@ Dependencies
 Example Playbook
 ----------------
 
-    - hosts: servers
-      roles:
-         - { role: common }
+```yml
+- hosts: servers
+  roles:
+      - role: common
+```
 
 License
 -------
